@@ -16,6 +16,8 @@ target/
 ### IntelliJ IDEA ###
 LOGS
 pgdata
+grafanadata
+prometheusdata
 .idea
 .mvn
 mvnw
