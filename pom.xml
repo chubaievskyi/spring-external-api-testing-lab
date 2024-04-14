@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>com.chubaievskyi</groupId>
-    <artifactId>spring-todo-app-lab</artifactId>
-    <version>1.0.1</version>
-    <name>spring-todo-app-lab</name>
-    <description>spring-todo-app-lab</description>
+    <artifactId>spring-external-api-testing-lab</artifactId>
+    <version>1.0.3</version>
+    <name>spring-external-api-testing-lab</name>
+    <description>spring-external-api-testing-lab</description>
     <properties>
         <java.version>17</java.version>
     </properties>
