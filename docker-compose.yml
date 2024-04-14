@@ -2,29 +2,53 @@ version: '3.5'
 
 services:
   db_postgres:
-    restart: "always"
+    #    restart: "always"
+    restart: unless-stopped
     container_name: db_postgres
     ports:
       - "5432:5432"
-    #    network_mode: 'host'
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
     image: postgres:16.2-alpine3.19
+#    network_mode: host
     volumes:
       - ./pgdata:/var/lib/postgresql/data
       - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/001.sql
       - ./src/main/resources/data.sql:/docker-entrypoint-initdb.d/002.sql
+
+
   prometheus:
+    restart: unless-stopped
     container_name: prometheus
     image: prom/prometheus
+#    network_mode: host
     ports:
       - "9090:9090"
     volumes:
+      - ./prometheusdata:/etc/prometheus/
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+#    command:
+#      - '--config.file=/etc/prometheus/prometheus.yml'
+
+
   grafana:
+    restart: unless-stopped
     container_name: grafana
     image: grafana/grafana
+#    network_mode: host
     ports:
       - "3000:3000"
+    volumes:
+      - ./grafanadata:/var/lib/grafana
+#    environment:
+#      - GF_SECURITY_ADMIN_PASSWORD=admin
+#      - GF_SECURITY_PASSWORD=admin #пароль нового користувача
+#      - GF_SERVER_DOMAIN=localhost
+#      - GF_SECURITY_ADMIN_PASSWORD=admin # Пароль адміністратора
+#      - GF_USERS_FIRST_NAME=admin # Ім'я нового користувача
+#      - GF_USERS_LAST_NAME=admin # Прізвище нового користувача
+#      - GF_USERS_PASSWORD=admin # Пароль нового користувача
+#      - GF_USERS_EMAIL=admin@example.com # Email нового користувача
+#      - GF_SERVER_DOMAIN=localhost

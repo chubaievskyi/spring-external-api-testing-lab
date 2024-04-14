@@ -22,7 +22,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(urlConfig -> urlConfig
-                                .requestMatchers("/swagger", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                                .requestMatchers("/swagger", "/v3/api-docs/**", "/swagger-ui/**", "/actuator", "/actuator/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/users").hasAnyAuthority(ROLE_ADMIN)
                                 .requestMatchers(HttpMethod.DELETE, "/users/**").hasAnyAuthority(ROLE_ADMIN)
                                 .requestMatchers("/users/**", "/tasks", "/tasks/**").hasAnyAuthority(ROLE_ADMIN, ROLE_USER)
